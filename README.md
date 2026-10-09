@@ -15,16 +15,18 @@ npm run dev
 
 ## Database
 
-Run `supabase/migrations/0001_init.sql` in the Supabase SQL editor. Then make yourself admin:
+Run the files in `supabase/migrations/` in order (0001, then 0002) in the Supabase SQL editor.
+In Supabase → Authentication → Sign In / Providers → Email, turn off **Confirm email** (the free email service only sends to team members).
+Sign up on the site, then make yourself admin:
 
 ```sql
-update public.profiles set role = 'admin' where id = '<your auth user id>';
+update public.profiles set role = 'admin' where email = 'you@example.com';
 ```
 
 ## Status
 
 - [x] Sprint 0: public pages (home, services, how it works, about), schema for all features
-- [ ] Sprint 1: sign-in, Device Passport, service requests, admin
+- [x] Sprint 1: sign-in, Device Passport, service requests, admin (customers without accounts)
 - [ ] Sprint 2: buying advisor, diagnostic assistant
 - [ ] Sprint 3: Health Score, partners, reminders
 - [ ] Sprint 4: showcase

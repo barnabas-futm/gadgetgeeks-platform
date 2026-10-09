@@ -7,8 +7,8 @@ const steps = [
   { n: "3", title: "We keep a record", body: "Every device we touch gets a record of its specs and service history, so the next job is faster." },
 ];
 
-const beta = [
-  { name: "Device Passport", body: "One page per device: specs, battery health, warranty and every service done." },
+const beta: { name: string; body: string; live?: boolean }[] = [
+  { name: "Device Passport", body: "One page per device: specs, battery health, warranty and every service done.", live: true },
   { name: "Buying advisor", body: "Answer a few questions about budget and use, get three devices that fit, with the reasons." },
   { name: "Diagnostic assistant", body: "Describe the problem, see the likely causes, and know whether to fix it yourself or book us." },
   { name: "Gadget Health Score", body: "A 0–100 score for each device, with what would improve it." },
@@ -66,17 +66,27 @@ export default function Home() {
 
       <section className="mx-auto max-w-5xl px-4 pb-6">
         <div className="rounded-2xl bg-navy text-paper p-8 sm:p-10">
-          <p className="text-xs uppercase tracking-[0.25em] text-paper/60">In development · beta</p>
+          <p className="text-xs uppercase tracking-[0.25em] text-paper/60">Beta</p>
           <h2 className="mt-3 text-3xl">The GadgetGeeks platform</h2>
           <p className="mt-3 text-paper/75 max-w-2xl">
-            We are building our service into a platform. These AI-assisted tools are being built now and will open to
-            customers first.
+            We are building our service into a platform. The Device Passport is open now; the AI-assisted tools are being
+            built and will open to customers first.
           </p>
           <ul className="mt-8 grid gap-6 sm:grid-cols-2">
             {beta.map((b) => (
               <li key={b.name} className="border-t border-paper/20 pt-4">
-                <h3 className="text-xl">{b.name}</h3>
+                <h3 className="text-xl">
+                  {b.name}{" "}
+                  <span className={`ml-1 align-middle text-[10px] uppercase tracking-[0.2em] ${b.live ? "text-accent" : "text-paper/50"}`}>
+                    {b.live ? "Live in beta" : "In development"}
+                  </span>
+                </h3>
                 <p className="mt-1 text-sm text-paper/70">{b.body}</p>
+                {b.live && (
+                  <Link href="/signup" className="mt-2 inline-block text-sm underline underline-offset-4">
+                    Create your free Device Passport
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
