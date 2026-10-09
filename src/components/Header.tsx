@@ -13,7 +13,7 @@ export function Header() {
     <header className="border-b border-line bg-paper/90 backdrop-blur sticky top-0 z-10">
       <div className="mx-auto max-w-5xl px-4 h-16 flex items-center justify-between gap-4">
         <Link href="/" className="flex items-center gap-2.5">
-          <Image src="/gg-mark.png" alt="" width={44} height={22} priority />
+          <Image src="/gg-mark.png" alt="" width={30} height={30} priority />
           <span className="font-serif text-2xl leading-none">GadgetGeeks</span>
         </Link>
         <nav className="hidden sm:flex items-center gap-6 text-sm text-muted">
