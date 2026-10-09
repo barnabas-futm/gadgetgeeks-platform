@@ -8,8 +8,7 @@ export const site = {
   oneLiner:
     "We help you choose the right technology and keep it working for as long as you own it.",
   email: "gadgetgeeks.technologies@gmail.com",
-  // TODO: dedicated WhatsApp Business number in international format, e.g. "2348000000000"
-  whatsapp: "",
+  whatsapp: "2348051015605",
   location: "Gidan Kwano, Minna, Niger State",
 };
 
