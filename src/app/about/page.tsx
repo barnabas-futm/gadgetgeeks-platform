@@ -6,7 +6,8 @@ export const metadata: Metadata = { title: "About" };
 export default function About() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-16">
-      <h1 className="text-5xl">About GadgetGeeks</h1>
+      <p className="label">Since 2024 · Minna</p>
+      <h1 className="mt-3 text-5xl">About GadgetGeeks</h1>
       <div className="mt-8 space-y-5 text-lg text-muted leading-relaxed">
         <p>
           GadgetGeeks started in 2024 in Minna. People kept asking Barnabas which laptop to buy, why theirs was slow, and
@@ -22,7 +23,7 @@ export default function About() {
           sense, and a record of your device so every job builds on the last.
         </p>
       </div>
-      <div className="mt-12 border-t border-line pt-8">
+      <div className="mt-12 border-t-2 border-navy pt-8">
         <h2 className="text-2xl">Founder</h2>
         <p className="mt-2 text-muted">
           Barnabas Olawoore studied Mechatronics Engineering at the Federal University of Technology, Minna. He has been

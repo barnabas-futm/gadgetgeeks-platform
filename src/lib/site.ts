@@ -8,8 +8,8 @@ export const site = {
   oneLiner:
     "We help you choose the right technology and keep it working for as long as you own it.",
   email: "gadgetgeeks.technologies@gmail.com",
-  // TODO: dedicated WhatsApp Business number in international format, e.g. "2348000000000"
-  whatsapp: "",
+  // WhatsApp number in international format, digits only
+  whatsapp: "2348051015605",
   location: "Gidan Kwano, Minna, Niger State",
 };
 
@@ -20,6 +20,12 @@ export function bookingHref(message = "Hi GadgetGeeks, I'd like to book a servic
   return `mailto:${site.email}?subject=${encodeURIComponent("Service request")}&body=${encodeURIComponent(message)}`;
 }
 
+export type Tier = {
+  name: string;
+  price: number;
+  includes: string;
+};
+
 export type Service = {
   slug: string;
   name: string;
@@ -27,9 +33,30 @@ export type Service = {
   includes: string[];
   // TODO: fixed prices (Decision #026). null shows "Ask for price".
   priceFrom: number | null;
+  tiers?: Tier[];
 };
 
+// Starting prices from the 90-day validation plan; adjust once real jobs show what people pay.
+export const buyingHelpTiers: Tier[] = [
+  { name: "Basic", price: 10000, includes: "Shortlist and inspection before you pay" },
+  { name: "Standard", price: 15000, includes: "Basic, plus full setup of Windows, drivers and your software" },
+  { name: "Complete", price: 20000, includes: "Standard, plus your files moved across and 30 days of WhatsApp support" },
+];
+
 export const services: Service[] = [
+  {
+    slug: "buying-help",
+    name: "Laptop buying help",
+    summary:
+      "Tell us your budget and your course. We find the right laptop, check it before you pay, and set it up.",
+    includes: [
+      "Two or three options actually for sale in Minna or Abuja",
+      "Battery, drive, screen and ports checked before you pay",
+      "Setup with licensed software",
+    ],
+    priceFrom: buyingHelpTiers[0].price,
+    tiers: buyingHelpTiers,
+  },
   {
     slug: "os",
     name: "Operating system install and upgrade",
@@ -40,8 +67,12 @@ export const services: Service[] = [
   {
     slug: "software",
     name: "Software installation",
-    summary: "The tools your course or job needs, installed and working.",
-    includes: ["Microsoft Office", "Engineering software such as SolidWorks", "Drivers and utilities"],
+    summary: "The tools your course or job needs, installed and working. Licensed copies only.",
+    includes: [
+      "Microsoft Office",
+      "Engineering software using your own or a free student licence",
+      "Drivers and utilities",
+    ],
     priceFrom: null,
   },
   {
@@ -63,13 +94,6 @@ export const services: Service[] = [
     name: "New device setup",
     summary: "A new laptop or phone set up properly from day one.",
     includes: ["Accounts and backups", "Essential apps", "Bloatware removed"],
-    priceFrom: null,
-  },
-  {
-    slug: "advice",
-    name: "Buying advice",
-    summary: "Tell us your budget and what you need it for. We tell you what to buy and what to avoid.",
-    includes: ["Shortlist that fits your budget", "What to check before paying", "Where to buy"],
     priceFrom: null,
   },
 ];

@@ -25,11 +25,12 @@ const steps = [
 export default function HowItWorks() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-16">
-      <h1 className="text-5xl">How it works</h1>
-      <ol className="mt-10 space-y-10">
+      <p className="label">Four steps</p>
+      <h1 className="mt-3 text-5xl">How it works</h1>
+      <ol className="mt-12 border-t-2 border-navy">
         {steps.map((s, i) => (
-          <li key={s.title} className="grid grid-cols-[3rem_1fr] gap-4">
-            <span className="font-serif text-4xl text-accent leading-none">{i + 1}</span>
+          <li key={s.title} className="grid grid-cols-[3rem_1fr] gap-4 border-b border-line py-8">
+            <span className="font-mono text-sm font-medium text-accent pt-1.5">{String(i + 1).padStart(2, "0")}</span>
             <div>
               <h2 className="text-2xl">{s.title}</h2>
               <p className="mt-2 text-muted">{s.body}</p>
@@ -37,8 +38,8 @@ export default function HowItWorks() {
           </li>
         ))}
       </ol>
-      <a href={bookingHref()} className="mt-12 inline-block rounded-full bg-navy text-paper px-6 py-3 hover:bg-navy-soft">
-        Book a service
+      <a href={bookingHref()} className="btn btn-primary mt-12">
+        Book on WhatsApp
       </a>
     </div>
   );

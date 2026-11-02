@@ -1,14 +1,44 @@
 @import "tailwindcss";
 
 @theme {
-  --color-navy: #121a30;
-  --color-navy-soft: #2b3552;
-  --color-paper: #f7f5f0;
-  --color-line: #e2ded4;
-  --color-muted: #5d6375;
-  --color-accent: #c0832a;
+  --color-navy: #0a1f3c;
+  --color-navy-soft: #1d3558;
+  --color-paper: #f3f5f8;
+  --color-surface: #ffffff;
+  --color-line: #d5dbe3;
+  --color-muted: #54606f;
+  /* "Pass" green, used for checks, step numbers and highlights */
+  --color-accent: #0f7b55;
+  --color-accent-bright: #3fd99a;
+}
+
+/* Font variables come from next/font in layout.tsx */
+@theme inline {
+  --font-sans: var(--font-plex-sans), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+  --font-display: var(--font-archivo), var(--font-plex-sans), system-ui, sans-serif;
+  /* Only for the wordmark, to match the logo */
   --font-serif: "EB Garamond", Georgia, serif;
-  --font-sans: "Montserrat Variable", system-ui, sans-serif;
+}
+
+/* Angled corners taken from the G mark */
+@utility cut {
+  clip-path: polygon(
+    var(--cut, 12px) 0,
+    100% 0,
+    100% calc(100% - var(--cut, 12px)),
+    calc(100% - var(--cut, 12px)) 100%,
+    0 100%,
+    0 var(--cut, 12px)
+  );
+}
+
+@utility cut-sm {
+  --cut: 7px;
+}
+
+@utility cut-lg {
+  --cut: 22px;
 }
 
 body {
@@ -20,7 +50,59 @@ body {
 h1,
 h2,
 h3 {
-  font-family: var(--font-serif);
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variation-settings: "wdth" 112;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.4rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    --cut: 9px;
+    clip-path: polygon(
+      var(--cut) 0,
+      100% 0,
+      100% calc(100% - var(--cut)),
+      calc(100% - var(--cut)) 100%,
+      0 100%,
+      0 var(--cut)
+    );
+    transition: background-color 150ms;
+  }
+  .btn-primary {
+    background: var(--color-navy);
+    color: var(--color-surface);
+  }
+  .btn-primary:hover {
+    background: var(--color-navy-soft);
+  }
+  .btn-secondary {
+    background: color-mix(in srgb, var(--color-navy) 8%, transparent);
+    color: var(--color-navy);
+  }
+  .btn-secondary:hover {
+    background: color-mix(in srgb, var(--color-navy) 14%, transparent);
+  }
+  .btn-light {
+    background: var(--color-accent-bright);
+    color: var(--color-navy);
+  }
+  .btn-light:hover {
+    background: color-mix(in srgb, var(--color-accent-bright) 85%, white);
+  }
+
+  /* Small monospaced label, used instead of uppercase eyebrows */
+  .label {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+    color: var(--color-muted);
+  }
 }
