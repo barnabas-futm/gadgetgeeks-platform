@@ -16,7 +16,7 @@ export default function About() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-16">
       <p className="label">Since 2024 · Minna</p>
-      <h1 className="mt-3 text-5xl">About GadgetGeeks</h1>
+      <h1 className="mt-3 text-4xl sm:text-5xl">About GadgetGeeks</h1>
       <div className="mt-8 space-y-5 text-lg text-muted leading-relaxed">
         <p>
           GadgetGeeks started in 2024 in Minna. People kept asking Barnabas which laptop to buy, why theirs was slow, and

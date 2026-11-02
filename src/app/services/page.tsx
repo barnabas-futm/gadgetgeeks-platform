@@ -8,7 +8,7 @@ export default function ServicesPage() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-16">
       <p className="label">Price list</p>
-      <h1 className="mt-3 text-5xl">Services and prices</h1>
+      <h1 className="mt-3 text-4xl sm:text-5xl">Services and prices</h1>
       <p className="mt-4 text-muted max-w-2xl">
         Tick what you need to see an estimate, then send the list to us on WhatsApp. We agree the final price before any
         work starts. Where it says &quot;+ parts&quot;, we tell you the part price before buying it.

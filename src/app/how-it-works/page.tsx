@@ -54,7 +54,7 @@ export default function HowItWorks() {
   return (
     <div className="mx-auto max-w-3xl px-4 py-16">
       <p className="label">Four steps</p>
-      <h1 className="mt-3 text-5xl">How it works</h1>
+      <h1 className="mt-3 text-4xl sm:text-5xl">How it works</h1>
       <ol className="mt-12 border-t-2 border-navy">
         {steps.map((s, i) => (
           <li key={s.title} className="grid grid-cols-[3rem_1fr] gap-4 border-b border-line py-8">

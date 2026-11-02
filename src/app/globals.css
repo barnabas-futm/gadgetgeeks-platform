@@ -55,6 +55,8 @@ h3 {
   font-variation-settings: "wdth" 112;
   letter-spacing: -0.02em;
   line-height: 1.05;
+  /* Long words like "GadgetGeeks" wrap instead of pushing the page sideways on small phones */
+  overflow-wrap: break-word;
 }
 
 @layer components {
