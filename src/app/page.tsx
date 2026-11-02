@@ -66,7 +66,7 @@ export default function Home() {
   return (
     <>
       <section className="mx-auto max-w-6xl px-4 pt-14 pb-16 sm:pt-20 grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
-        <div>
+        <div className="stagger">
           <p className="label">{site.area} · we come to your hostel</p>
           <div className="mt-4">
             <Hook />
@@ -81,7 +81,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="cut cut-lg bg-line p-px">
+        <div className="rise-in cut cut-lg bg-line p-px">
           <div className="cut cut-lg bg-surface">
             <p className="label border-b border-line px-5 py-3">Prices</p>
             <dl className="px-5 py-2">

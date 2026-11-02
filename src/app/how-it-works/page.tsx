@@ -52,7 +52,7 @@ const faqs = [
 
 export default function HowItWorks() {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-16">
+    <div className="stagger mx-auto max-w-3xl px-4 py-16">
       <p className="label">Four steps</p>
       <h1 className="mt-3 text-4xl sm:text-5xl">How it works</h1>
       <ol className="mt-12 border-t-2 border-navy">

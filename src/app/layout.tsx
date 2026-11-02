@@ -6,6 +6,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { BackToTop } from "@/components/BackToTop";
+import { PageTransitions } from "@/components/PageTransitions";
 import { site } from "@/lib/site";
 
 const archivo = Archivo({ subsets: ["latin"], axes: ["wdth"], variable: "--font-archivo" });
@@ -38,6 +39,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <main className="flex-1">{children}</main>
         <Footer />
         <BackToTop />
+        <PageTransitions />
         {/* Vercel Web Analytics: counts visits once it's switched on in the Vercel dashboard. No cookies. */}
         <Script src="/_vercel/insights/script.js" strategy="afterInteractive" />
       </body>

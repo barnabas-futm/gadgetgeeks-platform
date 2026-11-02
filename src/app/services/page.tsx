@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: "Services and prices" };
 
 export default function ServicesPage() {
   return (
-    <div className="mx-auto max-w-4xl px-4 py-16">
+    <div className="stagger mx-auto max-w-4xl px-4 py-16">
       <p className="label">Price list</p>
       <h1 className="mt-3 text-4xl sm:text-5xl">Services and prices</h1>
       <p className="mt-4 text-muted max-w-2xl">
