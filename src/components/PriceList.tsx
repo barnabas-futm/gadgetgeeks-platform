@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { bookingHref, formatNaira, formatPrice, prices, type PriceItem, type ServiceGroup } from "@/lib/site";
 
 // The price list doubles as an estimator: tick what you need, see a running total,
@@ -8,6 +8,7 @@ import { bookingHref, formatNaira, formatPrice, prices, type PriceItem, type Ser
 export function PriceList({ groups, callout }: { groups: ServiceGroup[]; callout: number }) {
   const [counts, setCounts] = useState<Record<string, number>>({});
   const [outside, setOutside] = useState(false);
+  const barRef = useRef<HTMLDivElement>(null);
 
   const items = groups.flatMap((g) => g.items);
   const chosen = items.filter((i) => (counts[i.id] ?? 0) > 0);
@@ -43,6 +44,25 @@ export function PriceList({ groups, callout }: { groups: ServiceGroup[]; callout
     ...(outside ? [`- Callout outside Gidan Kwano (${formatNaira(callout)})`] : []),
     `Estimate from your price list: ${estimate}`,
   ].join("\n");
+
+  // Tell the back-to-top button how tall the estimate bar is, so it can sit above it
+  const barOpen = chosen.length > 0;
+  useEffect(() => {
+    const root = document.documentElement;
+    const bar = barRef.current;
+    if (!barOpen || !bar) {
+      root.style.removeProperty("--estimator-h");
+      return;
+    }
+    const update = () => root.style.setProperty("--estimator-h", `${bar.offsetHeight}px`);
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(bar);
+    return () => {
+      observer.disconnect();
+      root.style.removeProperty("--estimator-h");
+    };
+  }, [barOpen]);
 
   return (
     <div className={chosen.length ? "pb-36" : ""}>
@@ -112,7 +132,7 @@ export function PriceList({ groups, callout }: { groups: ServiceGroup[]; callout
       </label>
 
       {chosen.length > 0 && (
-        <div className="fixed inset-x-0 bottom-0 z-20 bg-navy text-paper shadow-[0_-8px_24px_rgba(10,31,60,0.25)] slide-up">
+        <div ref={barRef} className="fixed inset-x-0 bottom-0 z-20 bg-navy text-paper shadow-[0_-8px_24px_rgba(10,31,60,0.25)] slide-up">
           <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-between gap-x-6 gap-y-3 px-4 py-4">
             <div>
               <p className="font-mono text-xs text-paper/60">
