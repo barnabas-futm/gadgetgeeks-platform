@@ -5,6 +5,8 @@ export const site = {
   name: "GadgetGeeks",
   legalName: "GadgetGeeks Technologies",
   rcNumber: "BN 9889039",
+  // Change this when the site moves to its own domain
+  url: "https://gadgetgeeks.vercel.app",
   oneLiner: "Windows, software, upgrades and tune-ups for laptops in Gidan Kwano. On campus, we come to your hostel.",
   email: "gadgetgeeks.technologies@gmail.com",
   // WhatsApp number in international format, digits only

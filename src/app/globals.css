@@ -81,6 +81,11 @@ h3 {
   .btn:active {
     transform: translateY(1px) scale(0.98);
   }
+  /* The cut corners clip anything drawn outside the button, so the focus ring sits inside it */
+  .btn:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: -5px;
+  }
   .btn-primary {
     background: var(--color-navy);
     color: var(--color-surface);
