@@ -67,7 +67,7 @@ export default function HowItWorks() {
         ))}
       </ol>
 
-      <section id="faq" className="reveal mt-20">
+      <section id="faq" className="reveal mt-20 scroll-mt-44">
         <p className="label">Questions</p>
         <h2 className="mt-3 text-4xl">Things people ask</h2>
         <div className="mt-8 border-t-2 border-navy">
