@@ -25,10 +25,20 @@ export default function About() {
       </div>
       <div className="mt-12 border-t-2 border-navy pt-8">
         <h2 className="text-2xl">Founder</h2>
-        <p className="mt-2 text-muted">
-          Barnabas Olawoore studied Mechatronics Engineering at the Federal University of Technology, Minna. He has been
-          taking devices apart to understand them for as long as he can remember.
-        </p>
+        <div className="mt-2 space-y-4 text-muted">
+          <p>
+            Barnabas Olawoore studied Mechatronics Engineering at the Federal University of Technology, Minna, where his
+            work covers embedded systems and IoT.
+          </p>
+          <p>
+            He taught himself to fix computers before university. He watched a technician install Windows once, then went
+            home and did it on his own laptop. He has never handed his own laptop to anyone else to fix.
+          </p>
+          <p>
+            Since 2024 he has sorted out laptops for about 50 people in Gidan Kwano, most of them students. He still does
+            every job himself.
+          </p>
+        </div>
       </div>
     </div>
   );

@@ -70,7 +70,6 @@ export default function Home() {
               Full price list
             </Link>
           </div>
-          <p className="label mt-10">~50 customers since 2024 · most came by referral</p>
         </div>
 
         <div className="cut cut-lg bg-line p-px">
