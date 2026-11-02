@@ -7,7 +7,7 @@ const skills = [
   "Windows 10 and 11 installs, recovery and driver setup",
   "Engineering and course software such as SolidWorks, MATLAB and AutoCAD",
   "Finding why a laptop is slow and fixing it: tune-ups, RAM upgrades, HDD to SSD moves",
-  "Recovering files from failing drives",
+  "Data recovery from failing or dead drives",
   "Choosing parts and upgrades that fit the laptop and are worth the money",
 ];
 
@@ -48,8 +48,8 @@ export default function About() {
           <h2 className="mt-2 text-2xl">Barnabas Olawoore</h2>
           <p className="mt-1 text-sm text-muted">Mechatronics Engineering, Federal University of Technology, Minna</p>
           <p className="mt-5 text-muted">
-            Barnabas has been setting up, upgrading and fixing laptops for paying customers since 2024, about 50 so far,
-            most of them students in Gidan Kwano. He does every job himself.
+            Barnabas has more than two years of experience setting up, upgrading and fixing laptops for paying customers,
+            about 50 so far, most of them students in Gidan Kwano. He does every job himself.
           </p>
           <ul className="mt-5 grid gap-2 text-muted">
             {skills.map((s) => (
