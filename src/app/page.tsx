@@ -1,74 +1,121 @@
 import Link from "next/link";
-import { bookingHref, buyingHelpTiers, formatNaira, services, site } from "@/lib/site";
-import { InspectionReport } from "@/components/InspectionReport";
+import { bookingHref, formatNaira, headlinePrices, prices, site } from "@/lib/site";
+
+const problems = [
+  {
+    problem: "Laptop slow?",
+    fix: "We find out why, then fix it: a tune-up, more RAM or an SSD.",
+    price: `diagnosis ${formatNaira(prices.diagnosis)}`,
+    message: "Hi GadgetGeeks, my laptop is slow. It's a ",
+  },
+  {
+    problem: "Need SolidWorks, MATLAB or AutoCAD for your course?",
+    fix: "Installed and working, with a valid licence: yours, your school's, or a free student one where available.",
+    price: formatNaira(prices.courseSoftware),
+    message: "Hi GadgetGeeks, I need course software installed: ",
+  },
+  {
+    problem: "Windows crashed or full of viruses?",
+    fix: "A clean Windows 10/11 reinstall with drivers. Your files are backed up first.",
+    price: `from ${formatNaira(prices.windowsReinstall)}`,
+    message: "Hi GadgetGeeks, I need Windows reinstalled on my ",
+  },
+  {
+    problem: "New laptop, or starting fresh?",
+    fix: "Full setup: Windows, drivers, backup, Office and up to three programs.",
+    price: formatNaira(prices.fullSetup),
+    message: "Hi GadgetGeeks, I'd like the full setup bundle for my ",
+  },
+  {
+    problem: "Drive failing and your files are on it?",
+    fix: "We recover what can be recovered from a failing or dead drive.",
+    price: formatNaira(prices.dataRecovery),
+    message: "Hi GadgetGeeks, I need data recovered from my ",
+  },
+  {
+    problem: "Need a charger, mouse or flash drive?",
+    fix: "We order it for you and tell you the price before we buy.",
+    price: "ask",
+    message: "Hi GadgetGeeks, I need an accessory: ",
+  },
+];
 
 const steps = [
-  { n: "01", title: "Tell us what you need", body: "Buying a laptop, fixing a slow one, or setting up something new. Send us a WhatsApp message." },
-  { n: "02", title: "We sort it", body: "We do the work ourselves. For hardware repair, we send you to a technician we trust." },
-  { n: "03", title: "We keep a record", body: "Every device we touch gets a record of its specs and service history, so the next job is faster." },
+  { n: "01", title: "Message us on WhatsApp", body: "Tell us your laptop model and what's wrong, or what you need installed." },
+  {
+    n: "02",
+    title: "We agree the price first",
+    body: `From the price list, before any work starts. A diagnosis is ${formatNaira(prices.diagnosis)}, taken off the bill if you go ahead.`,
+  },
+  {
+    n: "03",
+    title: "We do it at your hostel",
+    body: `On campus the visit is included. Outside Gidan Kwano there's a ${formatNaira(prices.callout)} callout.`,
+  },
 ];
-
-const checks = [
-  "Specs match what the seller listed",
-  "Battery wear measured, not guessed",
-  "Drive health and hours of use read",
-  "Screen checked for dead pixels",
-  "Every key and port tested",
-  "No BIOS password or company lock",
-  "Charger is the right wattage and genuine",
-  "Windows activated and working",
-];
-
-const buyingHelpMessage = "Hi GadgetGeeks, I'd like help buying a laptop. My budget is ";
 
 export default function Home() {
   return (
     <>
-      <section className="mx-auto max-w-6xl px-4 pt-14 pb-16 sm:pt-20 grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+      <section className="mx-auto max-w-6xl px-4 pt-14 pb-16 sm:pt-20 grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
         <div>
-          <p className="label">Technology concierge · Gidan Kwano, Minna</p>
-          <h1 className="mt-4 text-[2.6rem] sm:text-6xl">Know what you&apos;re buying before you pay.</h1>
-          <p className="mt-6 text-lg text-muted max-w-xl">
-            {site.oneLiner} Starting with the laptop: we find it, check it, and set it up.
-          </p>
+          <p className="label">{site.area} · we come to your hostel</p>
+          <h1 className="mt-4 text-[2.6rem] sm:text-6xl">Laptop slow? Need course software? We sort it.</h1>
+          <p className="mt-6 text-lg text-muted max-w-xl">{site.oneLiner}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a href={bookingHref(buyingHelpMessage)} className="btn btn-primary">
-              Get buying help · from {formatNaira(buyingHelpTiers[0].price)}
+            <a href={bookingHref()} className="btn btn-primary">
+              Book on WhatsApp
             </a>
             <Link href="/services" className="btn btn-secondary">
-              All services
+              Full price list
             </Link>
           </div>
           <p className="label mt-10">~50 customers since 2024 · most came by referral</p>
         </div>
-        <InspectionReport />
+
+        <div className="cut cut-lg bg-line p-px">
+          <div className="cut cut-lg bg-surface">
+            <p className="label border-b border-line px-5 py-3">Prices</p>
+            <dl className="px-5 py-2">
+              {headlinePrices.map((p) => (
+                <div key={p.label} className="flex items-baseline justify-between gap-4 border-b border-dashed border-line py-3 last:border-0">
+                  <dt className="font-medium">{p.label}</dt>
+                  <dd className="font-mono text-sm text-right">{p.price}</dd>
+                </div>
+              ))}
+            </dl>
+            <div className="bg-navy px-5 py-4 text-paper">
+              <p className="text-sm">Price agreed before any work starts. Hostel visits on campus included.</p>
+              <Link href="/services" className="mt-2 inline-block font-mono text-xs text-accent-bright hover:underline">
+                See every price →
+              </Link>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section className="bg-surface border-y border-line">
         <div className="mx-auto max-w-6xl px-4 py-16">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <h2 className="text-3xl sm:text-4xl">What we do</h2>
-            <Link href="/services" className="label hover:text-navy">
-              Prices →
-            </Link>
-          </div>
+          <h2 className="text-3xl sm:text-4xl">What we fix</h2>
           <ul className="mt-8 border-t-2 border-navy">
-            {services.map((s, i) => (
+            {problems.map((p) => (
               <li
-                key={s.slug}
-                className="grid gap-1 border-b border-line py-5 sm:grid-cols-[3rem_16rem_1fr_auto] sm:items-baseline sm:gap-6"
+                key={p.problem}
+                className="grid gap-1 border-b border-line py-5 sm:grid-cols-[18rem_1fr_9rem] sm:items-baseline sm:gap-6"
               >
-                <span className="label">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="text-lg">{s.name}</h3>
-                <p className="text-sm text-muted">{s.summary}</p>
-                <p className="font-mono text-sm sm:text-right">
-                  {s.priceFrom ? `from ${formatNaira(s.priceFrom)}` : "ask"}
-                </p>
+                <h3 className="text-lg">{p.problem}</h3>
+                <p className="text-sm text-muted">{p.fix}</p>
+                <a
+                  href={bookingHref(p.message)}
+                  className="font-mono text-sm sm:text-right underline-offset-4 hover:underline"
+                >
+                  {p.price} →
+                </a>
               </li>
             ))}
           </ul>
           <p className="mt-5 text-sm text-muted">
-            We don&apos;t do hardware repair ourselves. We refer you to technicians we trust.
+            We don&apos;t do hardware repair such as screens, motherboards or liquid damage.
           </p>
         </div>
       </section>
@@ -88,24 +135,13 @@ export default function Home() {
 
       <section className="mx-auto max-w-6xl px-4">
         <div className="cut cut-lg bg-navy text-paper p-8 sm:p-12">
-          <p className="font-mono text-xs text-accent-bright">Buying a laptop this semester?</p>
-          <h2 className="mt-3 text-3xl sm:text-4xl max-w-2xl">Every inspection covers these eight checks.</h2>
-          <ul className="mt-10 grid gap-x-10 gap-y-4 font-mono text-sm sm:grid-cols-2">
-            {checks.map((c) => (
-              <li key={c} className="flex gap-3 border-b border-paper/15 pb-4">
-                <span className="text-accent-bright">✓</span>
-                <span className="text-paper/85">{c}</span>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-10 flex flex-wrap gap-3">
-            <a href={bookingHref(buyingHelpMessage)} className="btn btn-light">
-              Get buying help
-            </a>
-            <Link href="/services" className="btn bg-paper/10 text-paper hover:bg-paper/15">
-              See the three packages
-            </Link>
-          </div>
+          <h2 className="text-3xl sm:text-4xl max-w-2xl">Book with one WhatsApp message.</h2>
+          <p className="mt-4 text-paper/75 max-w-xl">
+            Tell us your laptop model and what you need. We reply with the price and a time that suits you.
+          </p>
+          <a href={bookingHref()} className="btn btn-light mt-8">
+            Book on WhatsApp
+          </a>
         </div>
       </section>
     </>

@@ -11,7 +11,7 @@ const plexSans = IBM_Plex_Sans({ subsets: ["latin"], weight: ["400", "500", "600
 const plexMono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-plex-mono" });
 
 export const metadata: Metadata = {
-  title: { default: `${site.name} — technology concierge`, template: `%s · ${site.name}` },
+  title: { default: `${site.legalName} — laptop software, upgrades and tune-ups`, template: `%s · ${site.name}` },
   description: site.oneLiner,
 };
 

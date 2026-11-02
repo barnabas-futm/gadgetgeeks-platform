@@ -19,8 +19,8 @@ export default function About() {
           written down.
         </p>
         <p>
-          GadgetGeeks puts those steps in one place: advice before you buy, proper setup, upgrades when they make
-          sense, and a record of your device so every job builds on the last.
+          GadgetGeeks fixes that for laptops in Gidan Kwano: software set up properly, upgrades when they make sense,
+          and a note of every job so the next one is quicker.
         </p>
       </div>
       <div className="mt-12 border-t-2 border-navy pt-8">

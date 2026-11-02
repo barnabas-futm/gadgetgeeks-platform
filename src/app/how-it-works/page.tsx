@@ -1,24 +1,24 @@
 import type { Metadata } from "next";
-import { bookingHref } from "@/lib/site";
+import { bookingHref, formatNaira, prices } from "@/lib/site";
 
 export const metadata: Metadata = { title: "How it works" };
 
 const steps = [
   {
-    title: "You get in touch",
-    body: "Message us or book online. Tell us the device and what you want done, or what is going wrong.",
+    title: "You message us on WhatsApp",
+    body: "Tell us your laptop model and what you want done, or what is going wrong.",
   },
   {
     title: "We agree the job and the price",
-    body: "We tell you what we will do, how long it takes and what it costs before any work starts.",
+    body: `We tell you what we will do, how long it takes and what it costs before any work starts. If we need to look first, a diagnosis is ${formatNaira(prices.diagnosis)}, taken off the bill if you go ahead.`,
   },
   {
-    title: "We do the work",
-    body: "Your files are backed up first. When we finish, we show you what changed, such as the boot time before and after.",
+    title: "We do the work at your hostel",
+    body: `On campus the visit is included; outside Gidan Kwano there's a ${formatNaira(prices.callout)} callout. Your files are backed up first, and when we finish we show you what changed.`,
   },
   {
-    title: "Your device gets a record",
-    body: "We note the specs, what we did and when. Next time you need help, or want to upgrade, we already know your device.",
+    title: "We keep a note of the job",
+    body: "We write down your laptop's specs and what we did. Next time you need help, we already know your device.",
   },
 ];
 

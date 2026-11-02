@@ -1,15 +1,15 @@
-// Single source for business details used across the site.
-// Anything marked TODO needs Barnabas's confirmation before launch.
+// Single source for business details and prices used across the site.
+// To change a price, change it in `prices` below. Every page reads from there.
 
 export const site = {
   name: "GadgetGeeks",
   legalName: "GadgetGeeks Technologies",
   rcNumber: "BN 9889039",
-  oneLiner:
-    "We help you choose the right technology and keep it working for as long as you own it.",
+  oneLiner: "Windows, software, upgrades and tune-ups for laptops in Gidan Kwano. On campus, we come to your hostel.",
   email: "gadgetgeeks.technologies@gmail.com",
   // WhatsApp number in international format, digits only
   whatsapp: "2348051015605",
+  area: "Gidan Kwano · FUTMinna",
   location: "Gidan Kwano, Minna, Niger State",
 };
 
@@ -20,84 +20,96 @@ export function bookingHref(message = "Hi GadgetGeeks, I'd like to book a servic
   return `mailto:${site.email}?subject=${encodeURIComponent("Service request")}&body=${encodeURIComponent(message)}`;
 }
 
-export type Tier = {
-  name: string;
-  price: number;
-  includes: string;
+// Price sheet for the 8-week test (naira). Parts are charged on top where marked.
+export const prices = {
+  windowsReinstall: 5000,
+  dataRecovery: 7000,
+  softwarePerProgram: 2000,
+  courseSoftware: 5000,
+  fullSetup: 12000,
+  premiumSetup: 15000,
+  ramUpgrade: 2000,
+  ssdCloned: 4000,
+  ssdFreshInstall: 7000,
+  diagnosis: 1000,
+  tuneUp: 3000,
+  callout: 2000,
 };
 
-export type Service = {
+export type PriceItem = {
+  name: string;
+  // null shows "Ask"
+  price: number | null;
+  plusParts?: boolean;
+  note?: string;
+};
+
+export type ServiceGroup = {
   slug: string;
   name: string;
-  summary: string;
-  includes: string[];
-  // TODO: fixed prices (Decision #026). null shows "Ask for price".
-  priceFrom: number | null;
-  tiers?: Tier[];
+  problem: string;
+  items: PriceItem[];
 };
 
-// Starting prices from the 90-day validation plan; adjust once real jobs show what people pay.
-export const buyingHelpTiers: Tier[] = [
-  { name: "Basic", price: 10000, includes: "Shortlist and inspection before you pay" },
-  { name: "Standard", price: 15000, includes: "Basic, plus full setup of Windows, drivers and your software" },
-  { name: "Complete", price: 20000, includes: "Standard, plus your files moved across and 30 days of WhatsApp support" },
-];
-
-export const services: Service[] = [
+export const serviceGroups: ServiceGroup[] = [
   {
-    slug: "buying-help",
-    name: "Laptop buying help",
-    summary:
-      "Tell us your budget and your course. We find the right laptop, check it before you pay, and set it up.",
-    includes: [
-      "Two or three options actually for sale in Minna or Abuja",
-      "Battery, drive, screen and ports checked before you pay",
-      "Setup with licensed software",
+    slug: "os-software",
+    name: "OS and software",
+    problem: "Windows crashed, or your course software won't install?",
+    items: [
+      { name: "Format and reinstall Windows 10/11", price: prices.windowsReinstall, note: "With drivers and a basic backup of your files" },
+      { name: "Software install", price: prices.softwarePerProgram, note: "Per program" },
+      {
+        name: "Course software: SolidWorks, MATLAB, AutoCAD",
+        price: prices.courseSoftware,
+        note: "Needs a valid licence: yours, your school's, or a free student one where available",
+      },
+      { name: "Full setup bundle", price: prices.fullSetup, note: "Windows, drivers, backup, Office and up to 3 programs" },
+      { name: "Premium bundle", price: prices.premiumSetup, note: "Full setup plus one course software" },
     ],
-    priceFrom: buyingHelpTiers[0].price,
-    tiers: buyingHelpTiers,
-  },
-  {
-    slug: "os",
-    name: "Operating system install and upgrade",
-    summary: "A clean Windows install or upgrade, with drivers and updates done.",
-    includes: ["Backup of your files first", "Drivers and updates", "Basic security setup"],
-    priceFrom: null,
-  },
-  {
-    slug: "software",
-    name: "Software installation",
-    summary: "The tools your course or job needs, installed and working. Licensed copies only.",
-    includes: [
-      "Microsoft Office",
-      "Engineering software using your own or a free student licence",
-      "Drivers and utilities",
-    ],
-    priceFrom: null,
-  },
-  {
-    slug: "optimisation",
-    name: "Performance optimisation",
-    summary: "A slow laptop made usable again without buying a new one.",
-    includes: ["Startup and background clean-up", "Storage clean-up", "Before and after boot time"],
-    priceFrom: null,
   },
   {
     slug: "upgrades",
-    name: "RAM and SSD upgrades",
-    summary: "The upgrade that gives the biggest speed gain for the money.",
-    includes: ["Compatibility check before buying", "Part sourcing", "Data moved to the new drive"],
-    priceFrom: null,
+    name: "Upgrades",
+    problem: "Laptop too slow to keep up?",
+    items: [
+      { name: "RAM upgrade", price: prices.ramUpgrade, plusParts: true, note: "Labour only" },
+      { name: "HDD to SSD, cloned", price: prices.ssdCloned, plusParts: true, note: "Everything moved across as it is" },
+      { name: "HDD to SSD with a fresh Windows install", price: prices.ssdFreshInstall, plusParts: true },
+    ],
   },
   {
-    slug: "setup",
-    name: "New device setup",
-    summary: "A new laptop or phone set up properly from day one.",
-    includes: ["Accounts and backups", "Essential apps", "Bloatware removed"],
-    priceFrom: null,
+    slug: "diagnosis",
+    name: "Diagnosis and tune-up",
+    problem: "Not sure what's wrong?",
+    items: [
+      { name: "Diagnosis", price: prices.diagnosis, note: "Taken off the bill if you go ahead with the fix" },
+      { name: "Tune-up", price: prices.tuneUp, note: "Cleanup, startup fixes and fresh thermal paste" },
+      { name: "Data recovery", price: prices.dataRecovery, note: "From a failing or dead drive" },
+    ],
   },
+  {
+    slug: "accessories",
+    name: "Accessories",
+    problem: "Need a charger, mouse or flash drive?",
+    items: [
+      { name: "Mice, chargers, flash drives, adapters", price: null, note: "Ordered when you ask. We tell you the price first." },
+    ],
+  },
+];
+
+// Shown in the site header strip and on flyers
+export const headlinePrices = [
+  { label: "Windows reinstall", price: `from ${formatNaira(prices.windowsReinstall)}` },
+  { label: "Full setup", price: formatNaira(prices.fullSetup) },
+  { label: "RAM and SSD upgrades", price: `from ${formatNaira(prices.ramUpgrade)} + parts` },
 ];
 
 export function formatNaira(n: number) {
   return "₦" + n.toLocaleString("en-NG");
+}
+
+export function formatPrice(item: PriceItem) {
+  if (item.price === null) return "Ask";
+  return formatNaira(item.price) + (item.plusParts ? " + parts" : "");
 }
