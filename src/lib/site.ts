@@ -37,10 +37,13 @@ export const prices = {
 };
 
 export type PriceItem = {
+  id: string;
   name: string;
   // null shows "Ask"
   price: number | null;
   plusParts?: boolean;
+  // Priced per unit; the estimator shows a count instead of a tick box
+  perUnit?: boolean;
   note?: string;
 };
 
@@ -57,15 +60,17 @@ export const serviceGroups: ServiceGroup[] = [
     name: "OS and software",
     problem: "Windows crashed, or your course software won't install?",
     items: [
-      { name: "Format and reinstall Windows 10/11", price: prices.windowsReinstall, note: "With drivers and a basic backup of your files" },
-      { name: "Software install", price: prices.softwarePerProgram, note: "Per program" },
+      { id: "windows", name: "Format and reinstall Windows 10/11", price: prices.windowsReinstall, note: "With drivers and a basic backup of your files" },
+      { id: "software", name: "Software install", price: prices.softwarePerProgram, perUnit: true, note: "Per program, whatever you need" },
       {
-        name: "Course software: SolidWorks, MATLAB, AutoCAD",
+        id: "course",
+        name: "Course software",
+        perUnit: true,
         price: prices.courseSoftware,
-        note: "Needs a valid licence: yours, your school's, or a free student one where available",
+        note: "Engineering, design and maths software such as SolidWorks, MATLAB or AutoCAD. Needs a valid licence: yours, your school's, or a free student one where available",
       },
-      { name: "Full setup bundle", price: prices.fullSetup, note: "Windows, drivers, backup, Office and up to 3 programs" },
-      { name: "Premium bundle", price: prices.premiumSetup, note: "Full setup plus one course software" },
+      { id: "full", name: "Full setup bundle", price: prices.fullSetup, note: "Windows, drivers, backup, Office and up to 3 programs" },
+      { id: "premium", name: "Premium bundle", price: prices.premiumSetup, note: "Full setup plus one course software" },
     ],
   },
   {
@@ -73,9 +78,9 @@ export const serviceGroups: ServiceGroup[] = [
     name: "Upgrades",
     problem: "Laptop too slow to keep up?",
     items: [
-      { name: "RAM upgrade", price: prices.ramUpgrade, plusParts: true, note: "Labour only" },
-      { name: "HDD to SSD, cloned", price: prices.ssdCloned, plusParts: true, note: "Everything moved across as it is" },
-      { name: "HDD to SSD with a fresh Windows install", price: prices.ssdFreshInstall, plusParts: true },
+      { id: "ram", name: "RAM upgrade", price: prices.ramUpgrade, plusParts: true, note: "Labour only" },
+      { id: "ssd-clone", name: "HDD to SSD, cloned", price: prices.ssdCloned, plusParts: true, note: "Everything moved across as it is" },
+      { id: "ssd-fresh", name: "HDD to SSD with a fresh Windows install", price: prices.ssdFreshInstall, plusParts: true },
     ],
   },
   {
@@ -83,17 +88,22 @@ export const serviceGroups: ServiceGroup[] = [
     name: "Diagnosis and tune-up",
     problem: "Not sure what's wrong?",
     items: [
-      { name: "Diagnosis", price: prices.diagnosis, note: "Taken off the bill if you go ahead with the fix" },
-      { name: "Tune-up", price: prices.tuneUp, note: "Cleanup, startup fixes and fresh thermal paste" },
-      { name: "Data recovery", price: prices.dataRecovery, note: "From a failing or dead drive" },
+      { id: "diagnosis", name: "Diagnosis", price: prices.diagnosis, note: "Taken off the bill if you go ahead with the fix" },
+      { id: "tuneup", name: "Tune-up", price: prices.tuneUp, note: "Cleanup, startup fixes and fresh thermal paste" },
+      { id: "recovery", name: "Data recovery", price: prices.dataRecovery, note: "From a failing or dead drive" },
     ],
   },
   {
     slug: "accessories",
     name: "Accessories",
-    problem: "Need a charger, mouse or flash drive?",
+    problem: "Need something for your laptop?",
     items: [
-      { name: "Mice, chargers, flash drives, adapters", price: null, note: "Ordered when you ask. We tell you the price first." },
+      {
+        id: "accessory",
+        name: "Any accessory you need",
+        price: null,
+        note: "Chargers, mice, flash drives, adapters and more. Ordered when you ask; we tell you the price first.",
+      },
     ],
   },
 ];

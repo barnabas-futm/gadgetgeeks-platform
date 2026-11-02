@@ -74,7 +74,12 @@ h3 {
       0 100%,
       0 var(--cut)
     );
-    transition: background-color 150ms;
+    transition:
+      background-color 150ms,
+      transform 100ms;
+  }
+  .btn:active {
+    transform: translateY(1px) scale(0.98);
   }
   .btn-primary {
     background: var(--color-navy);
@@ -104,5 +109,45 @@ h3 {
     font-size: 0.78rem;
     letter-spacing: 0.02em;
     color: var(--color-muted);
+  }
+}
+
+/* Subtle motion. Skipped entirely for people who turn off motion on their phone. */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fade-in,
+  .hook-item {
+    animation: fade-in 350ms ease-out both;
+  }
+  .slide-up {
+    animation: slide-up 250ms ease-out both;
+  }
+
+  /* Sections ease in as they scroll into view, where the browser supports it */
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: fade-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 30%;
+    }
   }
 }
