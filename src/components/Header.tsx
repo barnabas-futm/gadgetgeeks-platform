@@ -3,6 +3,7 @@ import Image from "next/image";
 import { bookingHref, headlinePrices } from "@/lib/site";
 
 const links = [
+  { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
   { href: "/how-it-works", label: "How it works" },
   { href: "/about", label: "About" },
